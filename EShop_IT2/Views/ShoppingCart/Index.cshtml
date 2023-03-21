@@ -1,0 +1,192 @@
+﻿@model EShop_IT2.Models.Cart
+
+@{
+    Layout = null;
+}
+
+
+@{
+    Layout = null;
+}
+
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" color:deeppink;" style="height: 50px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*  @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <b> @Html.ActionLink("E-SHOP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</b></li>
+
+                    <li>
+                        <img style="width: 40px; height: 40px; margin-top: 4px; margin-left: 650px;"
+                             src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                    </li>
+                    <li>
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                    </li>
+
+
+                </ul>
+
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <img style="width:40px; height:40px; margin-top: 4px;"
+                                 src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                        </li>
+                        <li>
+                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                        </li>
+                        <li style="margin-left: 50px;">
+                            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        </li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
+
+<h2 style="color:deeppink;" class="text-center">Shopping Cart <img src="data:image/png;base64,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" width="70px;" height="80px;" /></h2>
+
+
+@{ if (Session["Cart"] != null)
+    {
+        using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+        {
+            <table style=" border: 1px solid white; border-collapse: collapse; margin-left: 20%; width: 55%;">
+                <tr style="border: deeppink;">
+                    <th style="background-color: deeppink; color:white;">Name</th>
+                    <th style="background-color: deeppink; color:white;">Picture</th>
+                    <th style="background-color: deeppink; color: white;">Price</th>
+                    <th style="background-color: deeppink; color: white;">Quantity</th>
+                    <th style="background-color: deeppink; color: white;">Sub Total</th>
+                </tr>
+
+                @foreach (var cart in (List<EShop_IT2.Models.Cart>)Session["Cart"])
+                {
+
+                    <tr style="border: white;">
+
+
+                        <td>@cart.Product.ProductName</td>
+                        @* <td>@Html.ActionLink(@cart.Product.ProductName, "Details", "Products", new { id = cart.Product.ProductID })</td> *@
+                        <td><img src="@cart.Product.Picture" class="card-img-top" alt="..." width="40px" height="55px"></td>
+                        <td>@cart.Product.Price</td>
+                        <td>
+                            <input type="text" name="quantity" id="quantity" value="@cart.Quantity" />
+                            &nbsp;<span id="errmsg"></span>
+                        </td>
+                        <td>@(String.Format("{0:N0}", cart.Product.Price * cart.Quantity))</td>
+                        <td style="border: white;">
+
+                            @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.Product.ProductID },
+                            new { onclick = "return cofirm ('Are you sure you want to delete this?');" })
+
+
+                        </td>
+
+                    </tr>
+
+
+                }
+
+                <tr>
+                    <td colspan="4"> <div style="color:deeppink;"><b>Total:</b></div></td>
+                    <td>
+                        @{
+                            List<EShop_IT2.Models.Cart> temp = (List<EShop_IT2.Models.Cart>)Session["Cart"];
+                            var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.Price));
+                        }
+
+                        <div style="color:deeppink;"> <b> @total €  </b> </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div style="margin-left: 309px;">
+                @Html.ActionLink("Continue Shopping", "ProductPartial", "Products")
+                <div style="margin-left: 700px; margin-top: -22px;">@Html.ActionLink("Check Out", "CheckOut", "ShoppingCart")</div>  
+                <br />
+                <input type="submit" style="color:white; background-color:deeppink; border-color:deeppink;" value="Update Cart" />
+            </div>
+        }
+    }
+
+    else
+    {
+        <h4 style="color: deeppink; margin-left: 650px;">No items in your cart!</h4>
+    }
+
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function ()){
+        $("#quantity").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Enter digits only!").show().fadeOut("show");
+                return false;
+            }
+        });
+    });
+</script>
+
+

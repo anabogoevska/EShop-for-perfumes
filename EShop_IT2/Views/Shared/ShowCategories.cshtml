@@ -1,0 +1,20 @@
+﻿@model IEnumerable<EShop_IT2.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Categories</h2>
+
+
+
+@foreach (var item in Model) {
+    <ul>
+        <li>
+            @Html.DisplayFor(modelItem => item.CategoryName) <br />
+        </li>
+      
+    </ul>
+}
+
+

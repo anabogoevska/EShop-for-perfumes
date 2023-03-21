@@ -1,0 +1,195 @@
+﻿@model EShop_IT2.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = null;
+}
+
+<h2 style="margin-left: 200px;">Details</h2>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" color:deeppink;" style="height: 50px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*  @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <b> @Html.ActionLink("E-SHOP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</b></li>
+
+                    <li>
+                        <img style="width: 40px; height: 40px; margin-top: 4px; margin-left: 650px;"
+                             src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                    </li>
+                    <li>
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                    </li>
+
+
+                </ul>
+
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <img style="width:40px; height:40px; margin-top: 4px;"
+                                 src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                        </li>
+                        <li>
+                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                        </li>
+                        <li style="margin-left: 50px;">
+                            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        </li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
+
+<div style="margin-left: 200px;">
+
+    <hr />
+
+
+    <div class="col">
+        <img src="@Model.Picture" class="card-img-top" alt="..." width="250px" height="330" style="margin-left:17px;">
+    </div>
+
+    <div class="col" style="margin-left: 350px; margin-top:-280px;">
+
+        <h2><b> @Html.DisplayFor(model => model.ProductName)</b>  </h2>
+
+
+
+
+        <dd>
+            <h4><b> @Html.DisplayFor(model => model.Description)</b>  </h4>
+
+        </dd>
+
+
+
+
+        @{
+
+
+            if (Model.Rating == 5)
+            {
+
+                <img src="https://static.thenounproject.com/png/1143722-200.png" width="200px" height="188px" style="margin-top: -44px; margin-left: -12px;">
+
+            }
+
+            if (Model.Rating == 4)
+            {
+
+                <img src="https://static.thenounproject.com/png/1149720-200.png" width="160px" height="148px" style="margin-top: -44px; margin-left: -12px;">
+
+            }
+
+            if (Model.Rating == 3)
+            {
+
+
+                <img src="https://static.thenounproject.com/png/1149721-200.png" width="180px" height="168px" style="margin-top: -44px; margin-left: -12px;">
+
+            }
+
+            if (Model.Rating == 2)
+            {
+
+                <img src="https://static.thenounproject.com/png/2554122-200.png" width="120px" height="118px" style="margin-top: -44px; margin-left: -8px;">
+
+            }
+
+            if (Model.Rating == 1)
+            {
+
+                <img src="https://static.thenounproject.com/png/2155113-200.png" width="160px" height="148px" style="margin-top: -44px; margin-left: -12px;" />
+
+            }
+        }
+
+        <div style="margin-top: -30px;">
+            <dd>
+                <h4><b>@Html.DisplayFor(model => model.Price)</b></h4>
+            </dd>
+
+            <dd>
+                <h4><b>@Html.DisplayFor(model => model.Quantity)</b></h4>
+
+            </dd>
+        </div>
+    </div>
+</div>
+
+
+@*<p style="margin-left: 350px;">
+        @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = Model.ProductID }, null)
+    </p> *@
+<h4  style="margin-left: 78px; margin-top: -5px;">
+    <a  style="margin-left: 470px; color:white; background-color:deeppink; margin-top:10px; border-color:deeppink;" href="@Url.Action("OrderNow", "ShoppingCart",  new { id = Model.ProductID })"
+       class="btn btn-primary btn-lg text-center" style=" color: white;
+        background-color: deeppink;
+        border: black; height: 45px; width: 190px; ">
+        <div style="margin-left:-39px; "><b>Add to cart</b></div>
+        <img style="white:40px; height:40px; margin-left:110px; margin-top:-33px;" src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-royal-brites-poster-foam-board-photo-paper-royal-lace-19.png" />
+    </a>
+</h4>

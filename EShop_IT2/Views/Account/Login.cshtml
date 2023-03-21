@@ -1,0 +1,76 @@
+﻿@using EShop_IT2.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+
+
+<div >
+    
+</div>
+<body style="margin-top: 60px;">
+    <div class="row" style=" height: 689px; margin-top: -62px; width: 1541px; margin-left: -210px; background-image: url('https://www.guerlain.com/on/demandware.static/-/Sites-GSA_US_Storefront_catalog_new_DO_NOT_TOUCH/default/dwf5bb4122/HeroBanner_NewTemplate/Fragrance/AA/AA-HARVEST_HEADER-BANNER_PLP_DESKTOP_TRIO.jpg'); ">
+        <div class="col-lg-8" style=" background-color: white; width: 500px; margin-left: 208px; margin-top: 90px; }">
+            <div style="margin-left: 190px; margin-bottom: 50px; margin-top:20px;"> <h2>Log in</h2> </div>
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div style="margin-left:95px;">  @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" }) </div>
+                        <div class="col-md-10" style="margin-left:95px;">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" }) <br />
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div style="margin-left:95px;">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        </div>
+                        <div class="col-md-10" style="margin-left:95px;">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" }) <br />
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left: 23px; margin-top: -32px;">
+                        <div class="col-lg-offset-2 col-md-10">
+                            <div class="checkbox" style="margin-top:-20px;">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input style="color: white; margin-top: 50px; background-color: black; margin-left: 120px;" type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+
+                        <div style="margin-left: 100px; margin-left: 162px; color: darkslategray;">@Html.ActionLink("Register as a new user", "Register")</div>
+                    </p>
+                    @* Enable this once you have account confirmation enabled for password reset functionality *@
+                    @* <p style="margin-left: 15px;">
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>
+                    *@
+                }
+            </section>
+        </div>
+        @*
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+        *@
+    </div>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

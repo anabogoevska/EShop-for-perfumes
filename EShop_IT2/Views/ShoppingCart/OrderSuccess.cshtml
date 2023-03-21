@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "ProcessOrder";
+}
+
+
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" color:deeppink;" style="height: 50px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*  @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <b> @Html.ActionLink("E-SHOP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</b></li>
+
+                    <li>
+                        <img style="width: 40px; height: 40px; margin-top: 4px; margin-left: 650px;"
+                             src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                    </li>
+                    <li>
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                    </li>
+
+
+                </ul>
+
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <img style="width:40px; height:40px; margin-top: 4px;"
+                                 src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                        </li>
+                        <li>
+                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                        </li>
+                        <li style="margin-left: 50px;">
+                            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        </li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+<h4 style="margin-top: 90px; margin-left:470px;">Your order has been placed successfully. Please click @Html.ActionLink("here", "ProductPartial", "Products") to go to home page!</h4>
+
+

@@ -1,0 +1,176 @@
+﻿@model IEnumerable<EShop_IT2.Models.Product>
+
+@{
+    ViewBag.Title = "All products";
+}
+
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" color:deeppink;" style="height: 50px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*  @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <b> @Html.ActionLink("E-SHOP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</b></li>
+
+                 
+                    <li>
+                        @Html.ActionLink("Orders", "Index", "Orders")
+
+
+                    </li>
+
+
+                </ul>
+
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <img style="width:40px; height:40px; margin-top: 4px;"
+                                 src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png" />
+                        </li>
+                        <li>
+                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
+
+
+                        </li>
+                        <li style="margin-left: 50px;">
+                            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        </li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
+
+
+
+<div style="margin-left: 150px">
+    <br />
+    <h2 class="text-center">All products</h2>
+    <div>
+        <br />
+        @Html.ActionLink("Create New", "Create")
+        <hr style="height:2px;"></hr>
+        <br />
+        @using (Html.BeginForm())
+        {
+            <p>
+
+                <b> Find by name:</b> <br />
+                @Html.TextBox("SearchString")
+                <br />
+                <input type="submit" value="Search" style="color: white; background-color: black; margin-top: 10px;" />
+            </p>
+        }
+
+        <br />
+
+        <br />
+
+
+
+
+        <div class="row" style="margin-right:70px;">
+            @{
+
+                foreach (var item in Model)
+                {
+
+                    <div class="col-md-2" style="margin-top: 70px; border-color: pink; height: 300px; >
+                        <div class="card" style="width: 20rem;">
+                            <img src="@item.Picture" class="card-img-top" alt="..." width="120px" height="150px" style="margin-left:17px;">
+                            <div class="card-body text-center" style="margin-left:-30px;">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Brand.BrandName) </h4>
+                                <h4 class="card-text"><b> @Html.DisplayFor(modelItem => item.ProductName)</b></h4>
+                                <h4 class="card-text"> @Html.DisplayFor(modelItem => item.Price)</h4>
+                                @Html.ActionLink("Show details", "Details", new { id = item.ProductID }) <br />
+                                @* @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart",new { id = item.ProductID }, null) *@
+
+                            </div>
+                        </div>
+
+
+                        @*
+                        <div class="col-md-2" id="hello" style="height:270px; margin-left: 20px; background-color:pink;">
+                            <div class="card" style="width:210px; ">
+
+                                <div class="text-center">
+                                    <img src="@item.Picture" class="card-img-top" alt="..." width="120px" height="150px">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-center">  @Html.DisplayFor(modelItem => item.Brand.BrandName)</h4>
+                                    <h4 class="card-title text-center"><b>  @Html.DisplayFor(modelItem => item.ProductName) </b></h4>
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        *@
+
+
+                    }
+            }
+
+        </div>
+
+    </div>
+    </div>
+

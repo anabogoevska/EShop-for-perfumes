@@ -1,0 +1,97 @@
+﻿@model EShop_IT2.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    
+    <div>
+
+        <hr />
+
+
+        <div class="col">
+            <img src="@Model.Picture" class="card-img-top" alt="..." width="250px" height="330" style="margin-left:17px;">
+        </div>
+
+        <div class="col" style="margin-left: 350px; margin-top:-280px;">
+
+            <h2><b> @Html.DisplayFor(model => model.ProductName)</b>  </h2>
+
+
+
+
+            <dd>
+                <h4><b> @Html.DisplayFor(model => model.Description)</b>  </h4>
+
+            </dd>
+
+
+
+
+            @{
+
+
+                if (Model.Rating == 5)
+                {
+
+                    <img src="https://static.thenounproject.com/png/1143722-200.png" width="200px" height="188px" style="margin-top: -44px; margin-left: -12px;">
+
+                }
+
+                if (Model.Rating == 4)
+                {
+
+                    <img src="https://static.thenounproject.com/png/1149720-200.png" width="160px" height="148px" style="margin-top: -44px; margin-left: -12px;">
+
+                }
+
+                if (Model.Rating == 3)
+                {
+
+
+                    <img src="https://static.thenounproject.com/png/1149721-200.png" width="180px" height="168px" style="margin-top: -44px; margin-left: -12px;">
+
+                }
+
+                if (Model.Rating == 2)
+                {
+
+                    <img src="https://static.thenounproject.com/png/2554122-200.png" width="120px" height="118px" style="margin-top: -44px; margin-left: -8px;">
+
+                }
+
+                if (Model.Rating == 1)
+                {
+
+                    <img src="https://static.thenounproject.com/png/2155113-200.png" width="160px" height="148px" style="margin-top: -44px; margin-left: -12px;" />
+
+                }
+            }
+
+            <div style="margin-top: -30px;">
+                <dd>
+                    <h4><b>@Html.DisplayFor(model => model.Price)</b></h4>
+                </dd>
+
+                <dd>
+                    <h4><b>@Html.DisplayFor(model => model.Quantity)</b></h4>
+
+                </dd>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input style=" margin-left: 348px; background-color:black; border-color:black; color:white;" type="submit" value="Delete" class="btn btn-default" /> 
+         
+        </div>
+    }
+</div>

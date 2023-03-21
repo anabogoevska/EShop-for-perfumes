@@ -1,0 +1,11 @@
+﻿@using EShop_IT2.Models
+@model List<Category>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.CategoryName, "ProductPartialUser", "Products", new { category = item.CategoryId }, null);
+        </li>
+    }
+</ul>

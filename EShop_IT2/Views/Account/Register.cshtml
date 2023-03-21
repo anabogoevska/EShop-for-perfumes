@@ -1,0 +1,55 @@
+﻿@model EShop_IT2.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+<body style="margin-top: 60px;">
+    <div class="row" style=" height: 689px; margin-top: -62px; width: 1541px; margin-left: -210px; background-image: url('https://www.guerlain.com/on/demandware.static/-/Sites-GSA_US_Storefront_catalog_new_DO_NOT_TOUCH/default/dwf5bb4122/HeroBanner_NewTemplate/Fragrance/AA/AA-HARVEST_HEADER-BANNER_PLP_DESKTOP_TRIO.jpg'); ">
+        <div class="col-lg-8" style=" background-color: white; width: 500px; margin-left: 208px; margin-top: 90px; height:500px;">
+            <div style="margin-left: 190px; margin-bottom: 50px; margin-top:20px;"> <h2>Register</h2> </div>
+    
+   
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4 style="margin-left: 150px;">Create a new account.</h4>
+       
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+         <div style="margin-left:95px;">   @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" }) </div>
+            <div class="col-md-10" style="margin-left:95px;">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="margin-left:95px;">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            </div>
+                <div class="col-md-10" style="margin-left:95px;">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+        <div class="form-group">
+            <div style="margin-left:95px;">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" }) </div>
+                <div class="col-md-10" style="margin-left:95px;">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input style="color: white; margin-top: 15px; background-color: black; margin-left: 120px;" type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+   
+</body>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
